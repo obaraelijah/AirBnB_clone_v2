@@ -12,7 +12,7 @@ print("All States: {}".format(len(all_states.keys())))
 for state_key in all_states.keys():
     print(all_states[state_key])
 
-# Create a new State
+# Creating a new State
 new_state = State()
 new_state.name = "California"
 fs.new(new_state)
