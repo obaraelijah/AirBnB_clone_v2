@@ -19,7 +19,7 @@ fs.new(new_state)
 fs.save()
 print("New State: {}".format(new_state))
 
-# All States
+# All State
 all_states = fs.all(State)
 print("All States: {}".format(len(all_states.keys())))
 for state_key in all_states.keys():
