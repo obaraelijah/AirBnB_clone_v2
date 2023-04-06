@@ -9,7 +9,7 @@ sudo apt-get -y install nginx
 sudo mkdir -p /data/web_static/releases/test /data/web_static/shared
 
 # Create a fake HTML file
-echo"<!DOCTYPE html>
+echo "<!DOCTYPE html>
 <html>
   <head>
   </head>
