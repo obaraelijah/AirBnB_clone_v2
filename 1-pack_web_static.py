@@ -4,7 +4,7 @@
 from fabric.api import local
 from datetime import datetime
 
-@task
+
 def do_pack():
     """ a method to compress a file and return it's path """
 
