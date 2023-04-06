@@ -6,21 +6,22 @@ from datetime import datetime
 
 @task
 def do_pack():
-    """Creates a compressed archive of static files and if created successfully it returns the path o       r None
-    """
-    #timestamp and staic file path variables
-    time_stamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    static_files_path = "versions/web_static_{}.tgz".format(time_stamp)
+    """ a method to compress a file and return it's path """
+
+    """saving the current timestamp and creatinf filename"""
+    time_str = datetime.now().strftime("%Y%m%d%H%M%S")
+    static_file_path = "versions/web_static_{}.tgz".format(time_str)
 
     try:
-        # Create the versions directory if it doesn't exist
+        """create a directory called versions"""
         local("mkdir -p versions")
 
-        #creating archive filename 
-        local("tar -czvf {} web_static/".format(static_files_path))
-        #return path to file if sucessful
-        return static_files_path
+        """create an archive file"""
+        local("tar -cvzf {} web_static/".format(static_file_path))
 
+        """return the path to the archive file created"""
+        return "{}".format(static_file_path)
+
+        """return none if an error occurs"""
     except Exception as e:
-
         return None
