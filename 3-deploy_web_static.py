@@ -2,7 +2,7 @@
 """A module for web application deployment with Fabric."""
 import os
 from datetime import datetime
-from fabric.api import env, local, put, run, 
+from fabric.api import env, local, put, run 
 
 env.hosts = ['100.25.135.33', '34.207.253.223']
 env.key_filename = '~/.ssh/school'
