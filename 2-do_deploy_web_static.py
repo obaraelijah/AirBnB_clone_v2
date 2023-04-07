@@ -15,7 +15,7 @@ def do_deploy(archive_path):
     if not os.path.isfile(archive_path):
         return False
     compressed_filename = archive_path.split("/")[-1]
-    no_extension_file = compressed_file.split(".")[0]
+    no_extension_file = compressed_filename.split(".")[0]
 
     try:
         remote_path = "/data/web_static/releases/{}/".format(no_extension_file)
