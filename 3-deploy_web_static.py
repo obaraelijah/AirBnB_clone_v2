@@ -9,7 +9,6 @@ env.key_filename = '~/.ssh/school'
 env.user = 'ubuntu'
 
 
-
 def do_pack():
     """ a method to compress a file and return it's path """
 
@@ -37,17 +36,17 @@ def do_deploy(archive_path):
 
     if not os.path.isfile(archive_path):
         return False
-    compressed_filename = archive_path.split("/")[-1]
-    no_extension_file = compressed_filename.split(".")[0]
+    compressed_file = archive_path.split("/")[-1]
+    no_extension = compressed_file.split(".")[0]
 
     try:
-        remote_path = "/data/web_static/releases/{}/".format(no_extension_file)
+        remote_path = "/data/web_static/releases/{}/".format(no_extension)
         sym_link = "/data/web_static/current"
         put(archive_path, "/tmp/")
         run("sudo mkdir -p {}".format(remote_path))
-        run("sudo tar -xvzf /tmp/{} -C {}".format(compressed_filename,
+        run("sudo tar -xvzf /tmp/{} -C {}".format(compressed_file,
                                                   remote_path))
-        run("sudo rm /tmp/{}".format(compressed_filename))
+        run("sudo rm /tmp/{}".format(compressed_file))
         run("sudo mv {}/web_static/* {}".format(remote_path, remote_path))
         run("sudo rm -rf {}/web_static".format(remote_path))
         run("sudo rm -rf /data/web_static/current")
@@ -57,9 +56,9 @@ def do_deploy(archive_path):
         return False
 
 
-
 def deploy():
-    """deploys static files to server
-    """
-    archive_path = do_pack()
-    return do_deploy(archive_path) if archive_path else False
+    """Create and deploy an archive to a web server."""
+    file_path = do_pack()
+    if file_path is None:
+        return False
+    return do_deploy(file_path)
