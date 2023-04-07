@@ -2,14 +2,14 @@
 """A module for web application deployment with Fabric."""
 import os
 from datetime import datetime
-from fabric.api import env, local, put, run, runs_once
+from fabric.api import env, local, put, run, 
 
 env.hosts = ['100.25.135.33', '34.207.253.223']
 env.key_filename = '~/.ssh/school'
 env.user = 'ubuntu'
 
 
-@runs_once
+
 def do_pack():
     """ a method to compress a file and return it's path """
 
