@@ -10,18 +10,19 @@ def do_pack():
 
     """saving the current timestamp and creatinf filename"""
     time_str = datetime.now().strftime("%Y%m%d%H%M%S")
-    static_file_path = "versions/web_static_{}.tgz".format(time_str)
+    file_path = "versions/web_static_{}.tgz".format(time_str)
 
     try:
         """create a directory called versions"""
         local("mkdir -p versions")
 
         """create an archive file"""
-        local("tar -cvzf {} web_static/".format(static_file_path))
+        local("tar -cvzf {} web_static/".format(file_path))
 
         """return the path to the archive file created"""
-        return "{}".format(static_file_path)
+        return "{}".format(file_path)
 
         """return none if an error occurs"""
     except Exception as e:
         return None
+
