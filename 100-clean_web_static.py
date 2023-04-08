@@ -64,17 +64,25 @@ def deploy():
     return do_deploy(file_path)
 
 def do_clean(number=0):
-        """Removes out-of-date archives of the static files"""
-    # Remove old archives
-    archives_dir = 'versions/'
-    archives = os.listdir(archives_dir)
+    """Deletes out-of-date archives of the static files.
+    Args:
+        number (Any): The number of archives to keep.
+    """
+    archives = os.listdir('versions/')
     archives.sort(reverse=True)
-    for archive in archives[number:]:
-        os.remove(os.path.join(archives_dir, archive))
-     #Remove outdated releases
-    releases_dir = '/data/web_static/releases/'
-    releases = sorted(os.listdir(releases_dir), reverse=True)
-    for release in releases[number:]:
-        if release.startswith('web_static_'):
-            release_path = os.path.join(releases_dir, release)
-            os.system(f"rm -rf {release_path}")
+    start = int(number)
+    if not start:
+        start += 1
+    if start < len(archives):
+        archives = archives[start:]
+    else:
+        archives = []
+    for archive in archives:
+        os.unlink('versions/{}'.format(archive))
+    cmd_parts = [
+        "rm -rf $(",
+        "find /data/web_static/releases/ -maxdepth 1 -type d -iregex",
+        " '/data/web_static/releases/web_static_.*'",
+        " | sort -r | tr '\\n' ' ' | cut -d ' ' -f{}-)".format(start + 1)
+    ]
+    run(''.join(cmd_parts))
