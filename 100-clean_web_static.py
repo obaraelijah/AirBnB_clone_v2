@@ -68,8 +68,10 @@ def do_clean(number=0):
     Args:
         number (Any): The number of archives to keep.
     """
+    #list of all archives in the 'versions' directory
     archives = os.listdir('versions/')
     archives.sort(reverse=True)
+    # Determines the index of the first archive to delete
     start = int(number)
     if not start:
         start += 1
@@ -79,6 +81,7 @@ def do_clean(number=0):
         archives = []
     for archive in archives:
         os.unlink('versions/{}'.format(archive))
+    #shell command to delete old releases from server
     cmd_parts = [
         "rm -rf $(",
         "find /data/web_static/releases/ -maxdepth 1 -type d -iregex",
