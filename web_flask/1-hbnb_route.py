@@ -1,17 +1,24 @@
 #!/usr/bin/python3
-"""a flask script to display “Hello HBNB!”"""
+'''A simple Flask web application.
+'''
 from flask import Flask
 
+
 app = Flask(__name__)
-@app.route("/", strict_slashes=False)
+app.url_map.strict_slashes = False
+
+
+@app.route('/')
 def index():
-    """a function to return hello HBNB"""
-    return "Hello HBNB!"
+    '''The home page.'''
+    return 'Hello HBNB!'
 
-@app.route("/hbnb", strict_slashes=False)
-def index_hbnb():
-    """a function to return HBNB"""
-    return "HBNB"
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+@app.route('/hbnb')
+def hbnb():
+    '''The hbnb page.'''
+    return 'HBNB'
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port='5000')
