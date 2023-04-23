@@ -8,7 +8,6 @@ from models.state import State
 
 
 app = Flask(__name__)
-'''The Flask application instance.'''
 app.url_map.strict_slashes = False
 
 
